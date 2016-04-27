@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration> 
+     <properties resource="sqlserver.properties" />  
+     <settings>
+    	 <!-- 设置超时时间，它决定驱动等待一个数据库响应的时间  -->  
+    	<setting name="defaultStatementTimeout" value="25000"/>
+    </settings> 
+     <typeAliases>
+    	<package name="com.myBatise.model"/>
+    </typeAliases>
+    <environments default="development">  
+        <environment id="development">  
+            <transactionManager type="JDBC" />  
+            <dataSource type="POOLED">  
+                <property name="driver" value="${driver_class}" />  
+                <property name="url" value="${driver_url}" />  
+                <property name="username" value="${database_user}" />  
+                <property name="password" value="${database_password}" />  
+            </dataSource>  
+        </environment>  
+    </environments>  
+   
+    <!--将 自定义Mapper文件加入到配置文件中  -->  
+       <mappers>  
+        <mapper resource="com/myBatise/Mapper/SMS_Code_Mapper.xml"/>  
+        <mapper resource="com/myBatise/Mapper/CMS_CODE_Mapper.xml"/>
+        <mapper class="com.myBatise.Interface.CmsCodeMapperI"/>
+      </mappers>  
+</configuration>  

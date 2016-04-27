@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper  
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ <mapper namespace="com.myBatise.model.SMS_Code">
+    <!-- 添加 -->
+ 	<insert id="setSMSCode" parameterType="SMS_Code">
+ 		insert into SMS_Code(CodeID,CodeIndex,CodeParent,CodeName,CodeValue1,CodeValue2,CodeValue3) values(#{CodeID},#{CodeIndex},#{CodeParent},#{CodeName},#{CodeValue1},#{CodeValue2},#{CodeValue3})
+ 	</insert>
+ 	<!-- 批量添加数据 -->
+ 	<insert id="batchsetSMSCode" parameterType="java.util.List">
+ 		insert into SMS_Code(CodeID,CodeIndex,CodeParent,CodeName,CodeValue1,CodeValue2,CodeValue3)values
+ 		<foreach collection="list" item="item" index="index" separator=",">
+ 			(#{item.CodeID},#{item.CodeIndex},#{item.CodeParent},#{item.CodeName},#{item.CodeValue1},#{item.CodeValue2},#{item.CodeValue3})
+ 		</foreach>
+ 	</insert>
+ 	<!-- 删除 -->
+ 	<delete id="delSMSCode" parameterType="SMS_Code">
+ 		delete from SMS_Code where CodeID=#{CodeID}
+ 	</delete>
+ 	<!-- 批量删除数据 -->
+ 	<delete id="batchdelSMSCode" parameterType="java.util.List">
+ 		delete from SMS_Code where CodeID IN
+ 		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+ 			#{item}
+ 		</foreach>
+ 	</delete>
+ 	<!-- 修改 -->
+ 	<update id="upSMSCode" parameterType="SMS_Code">
+ 		update SMS_Code set
+ 				CodeName=#{CodeName},
+ 				CodeValue1=#{CodeValue1}
+ 		  where CodeID=#{CodeID}
+ 	</update>
+ 	<!-- 批量修改数据 -->
+ 	
+ 	<!-- 全部查询 -->
+ 	<select id="getSMSCodeList" resultType="SMS_Code">
+ 		select * from SMS_Code
+ 	</select>
+ 	<!-- 条件查询 -->
+ 	<select id="getSMSCodeforCodeID" resultType="SMS_Code">
+ 		select * from SMS_Code where CodeID=#{CodeID}
+ 	</select>
+ 	<!-- 模糊查询 -->
+ 	<select id="getSMSCodeforLikeCodeName"  resultType="SMS_Code"> 		
+ 		select * from SMS_Code where CodeName like '%'+#{CodeName}+'%'
+ 	</select>
+ 	
+ 	
+ </mapper>
